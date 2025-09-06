@@ -61,7 +61,7 @@ loot-tables:
           custom-item: "infinity_water_bucket"
           amount: 1
           chance: 0.05
-        - material: "POTION"
+        - material: "SPLASH_POTION"
           potion-effects:
             - "STRENGTH:2:60"
           amount: 1
@@ -220,6 +220,11 @@ loot-tables:
         - material: "DRAGON_EGG"
           amount: 1
           chance: 0.01
+        - material: "SPLASH_POTION"
+          amount: 1
+          chance: 0.02
+          potion-effects:
+            - "SPEED:2:20"
       xp_boost:
         enabled: true
         modifier: 4.0
