@@ -168,6 +168,24 @@ loot-tables:
         - material: "BEACON"
           amount: 1
           chance: 0.05
+        - material: "SPAWNER"
+          amount: 1
+          chance: 0.05
+          display-name: "&eZufälliger Spawner"
+          spawner-types:
+            - "ZOMBIE"
+            - "SKELETON"
+            - "SPIDER"
+            - "CAVE_SPIDER"
+            - "CREEPER"
+            - "SLIME"
+            - "WITCH"
+            - "PIGLIN"
+            - "BLAZE"
+            - "PIG"
+            - "COW"
+            - "CHICKEN"
+            - "SHEEP"
       xp_boost:
         enabled: true
         modifier: 3.0

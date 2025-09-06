@@ -6,9 +6,12 @@ import com.danny.treasurechests.Animation.ScaleEffect;
 import org.bukkit.Bukkit;
 import com.danny.treasurechests.Animation.SoundEffect;
 import org.bukkit.Particle;
+import org.bukkit.block.CreatureSpawner;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BlockStateMeta;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -144,6 +147,7 @@ public class LootManager {
                     String customItem = (String) itemMap.get("custom-item");
                     String itemDisplayName = (String) itemMap.get("display-name");
                     java.util.List<String> potionEffects = (java.util.List<String>) itemMap.get("potion-effects");
+                    List<String> spawnerTypes = (List<String>) itemMap.get("spawner-types");
                     String amount = "1";
                     Object amountObj = itemMap.get("amount");
                     if (amountObj != null) {
@@ -156,7 +160,7 @@ public class LootManager {
                         chance = ((Number) chanceObj).doubleValue();
                     }
 
-                    items.add(new LootItem(material, customItem, itemDisplayName, amount, chance, potionEffects));
+                    items.add(new LootItem(material, customItem, itemDisplayName, amount, chance, potionEffects, spawnerTypes));
                 } catch (Exception e) {
                     plugin.getLogger().severe(plugin.getMessageManager().getMessage("config-error", "%path%", "items", "%error%", e.getMessage()));
                 }
@@ -310,6 +314,24 @@ public class LootManager {
             }
             potion.setItemMeta(meta);
             return potion;
+        }
+
+        if (item.getMaterial() == org.bukkit.Material.SPAWNER && item.getSpawnerTypes() != null && !item.getSpawnerTypes().isEmpty()) {
+            ItemStack spawner = new ItemStack(item.getMaterial(), parseAmount(item.getAmount()));
+            BlockStateMeta meta = (BlockStateMeta) spawner.getItemMeta();
+            if (meta != null) {
+                CreatureSpawner spawnerState = (CreatureSpawner) meta.getBlockState();
+                List<String> spawnerTypes = item.getSpawnerTypes();
+                String randomType = spawnerTypes.get(random.nextInt(spawnerTypes.size()));
+                try {
+                    spawnerState.setSpawnedType(EntityType.valueOf(randomType.toUpperCase()));
+                    meta.setBlockState(spawnerState);
+                    spawner.setItemMeta(meta);
+                    return spawner;
+                } catch (IllegalArgumentException e) {
+                    plugin.getLogger().warning("Invalid entity type for spawner: " + randomType);
+                }
+            }
         }
 
         return new ItemStack(item.getMaterial(), parseAmount(item.getAmount()));

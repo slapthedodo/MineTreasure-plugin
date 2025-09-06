@@ -2,6 +2,8 @@ package com.danny.treasurechests;
 
 import org.bukkit.Material;
 
+import java.util.List;
+
 public class LootItem {
 
     private final Material material;
@@ -9,15 +11,17 @@ public class LootItem {
     private final String displayName;
     private final String amount;
     private final double chance;
-    private final java.util.List<String> potionEffects;
+    private final List<String> potionEffects;
+    private final List<String> spawnerTypes;
 
-    public LootItem(org.bukkit.Material material, String customItem, String displayName, String amount, double chance, java.util.List<String> potionEffects) {
+    public LootItem(Material material, String customItem, String displayName, String amount, double chance, List<String> potionEffects, List<String> spawnerTypes) {
         this.material = material;
         this.customItem = customItem;
         this.displayName = displayName;
         this.amount = amount;
         this.chance = chance;
         this.potionEffects = potionEffects;
+        this.spawnerTypes = spawnerTypes;
     }
 
     public Material getMaterial() {
@@ -40,7 +44,11 @@ public class LootItem {
         return chance;
     }
 
-    public java.util.List<String> getPotionEffects() {
+    public List<String> getPotionEffects() {
         return potionEffects;
+    }
+
+    public List<String> getSpawnerTypes() {
+        return spawnerTypes;
     }
 }
