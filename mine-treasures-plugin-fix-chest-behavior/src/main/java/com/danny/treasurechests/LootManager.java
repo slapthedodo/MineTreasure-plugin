@@ -295,7 +295,7 @@ public class LootManager {
             }
         }
 
-        if (item.getMaterial() == org.bukkit.Material.POTION && item.getPotionEffects() != null) {
+        if ((item.getMaterial() == org.bukkit.Material.POTION || item.getMaterial() == org.bukkit.Material.SPLASH_POTION) && item.getPotionEffects() != null) {
             ItemStack potion = new ItemStack(item.getMaterial(), parseAmount(item.getAmount()));
             org.bukkit.inventory.meta.PotionMeta meta = (org.bukkit.inventory.meta.PotionMeta) potion.getItemMeta();
             if (item.getDisplayName() != null) {
