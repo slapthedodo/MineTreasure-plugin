@@ -1,11 +1,11 @@
 package com.slapthedodo.treasurechests;
 
 import org.bukkit.entity.Entity;
+import org.bukkit.Particle;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -40,19 +40,29 @@ public class PhantomRepellerListener implements Listener {
                 PersistentDataContainer data = item.getItemMeta().getPersistentDataContainer();
                 if (data.has(plugin.getNamespacedKey("phantom_repeller_tier"), PersistentDataType.STRING)) {
                     String tier = data.get(plugin.getNamespacedKey("phantom_repeller_tier"), PersistentDataType.STRING);
-                    double repelRadius = plugin.getConfig().getDouble("items.phantom_repellers." + tier + ".repel-radius", 10.0);
-                    repelPhantoms(player, repelRadius);
+                    repelPhantoms(player, tier);
                     return; // Found a repeller, no need to check the rest of the inventory
                 }
             }
         }
     }
 
-    private void repelPhantoms(Player player, double radius) {
+    private void repelPhantoms(Player player, String tier) {
+        double radius = plugin.getConfig().getDouble("items.phantom_repellers." + tier + ".repel-radius", 10.0);
+        double pushForce = plugin.getConfig().getDouble("items.phantom_repellers." + tier + ".push-force", 1.5);
+        String particleEffect = plugin.getConfig().getString("items.phantom_repellers." + tier + ".particle-effect", "CRIT");
+
         for (Entity entity : player.getNearbyEntities(radius, radius, radius)) {
             if (entity.getType() == EntityType.PHANTOM) {
                 Vector direction = entity.getLocation().toVector().subtract(player.getLocation().toVector()).normalize();
-                entity.setVelocity(direction.multiply(1.5));
+                entity.setVelocity(direction.multiply(pushForce));
+
+                try {
+                    Particle particle = Particle.valueOf(particleEffect.toUpperCase());
+                    player.getWorld().spawnParticle(particle, entity.getLocation(), 10, 0.5, 0.5, 0.5, 0);
+                } catch (IllegalArgumentException e) {
+                    // Particle effect not found, do nothing or log a warning
+                }
             }
         }
     }
