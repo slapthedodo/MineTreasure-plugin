@@ -61,19 +61,9 @@
             <id>sk89q-repo</id>
             <url>https://maven.enginehub.org/repo/</url>
         </repository>
-        <repository>
-            <id>songoda-repo</id>
-            <url>https://repo.songoda.com/repository/minecraft-plugins/</url>
-        </repository>
     </repositories>
 
     <dependencies>
-        <dependency>
-            <groupId>com.craftaro</groupId>
-            <artifactId>UltimateClaims</artifactId>
-            <version>2.2.1</version>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
