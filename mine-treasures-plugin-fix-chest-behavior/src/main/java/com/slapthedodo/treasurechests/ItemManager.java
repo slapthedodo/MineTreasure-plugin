@@ -11,6 +11,7 @@ import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class ItemManager {
 
@@ -124,6 +125,33 @@ public class ItemManager {
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         meta.getPersistentDataContainer().set(plugin.getNamespacedKey("infinity_golden_carrot"), PersistentDataType.BOOLEAN, true);
+
+        item.setItemMeta(meta);
+        return item;
+    }
+
+    public ItemStack createPhantomRepeller(String tier) {
+        ConfigurationSection section = plugin.getConfig().getConfigurationSection("items.phantom_repellers." + tier);
+        if (section == null) {
+            return null;
+        }
+
+        ItemStack item = new ItemStack(Material.PHANTOM_MEMBRANE);
+        ItemMeta meta = item.getItemMeta();
+
+        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', section.getString("display-name")));
+
+        List<String> lore = new ArrayList<>();
+        for (String line : section.getStringList("lore")) {
+            lore.add(ChatColor.translateAlternateColorCodes('&', line));
+        }
+        meta.setLore(lore);
+
+        meta.addEnchant(Enchantment.LUCK, 1, false);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        meta.getPersistentDataContainer().set(plugin.getNamespacedKey("phantom_repeller_tier"), PersistentDataType.STRING, tier);
+        meta.getPersistentDataContainer().set(plugin.getNamespacedKey("unique_id"), PersistentDataType.STRING, UUID.randomUUID().toString());
 
         item.setItemMeta(meta);
         return item;

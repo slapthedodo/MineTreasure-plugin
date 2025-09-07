@@ -42,6 +42,7 @@ public class TreasureChests extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new LuckBoosterListener(this), this);
         getServer().getPluginManager().registerEvents(new InfinityWaterBucketListener(this), this);
         getServer().getPluginManager().registerEvents(new InfinityGoldenCarrotListener(this), this);
+        getServer().getPluginManager().registerEvents(new PhantomRepellerListener(this), this);
 
         // Register commands
         getCommand("givetreasureitem").setExecutor(new GiveTreasureItemCommand(this));

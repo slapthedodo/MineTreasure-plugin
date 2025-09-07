@@ -31,8 +31,24 @@ public class GiveTreasureItemCommand implements CommandExecutor {
         }
 
         ItemStack item = null;
-        if (plugin.getConfig().getConfigurationSection("items.luck_boosters").getKeys(false).contains(itemName)) {
-            item = plugin.getItemManager().createLuckBooster(itemName);
+        if (itemName.equalsIgnoreCase("luck_booster")) {
+            if (args.length < 3) {
+                sender.sendMessage("Usage: /givetreasureitem luck_booster <player> <tier>");
+                return false;
+            }
+            String tier = args[2];
+            if (plugin.getConfig().getConfigurationSection("items.luck_boosters").getKeys(false).contains(tier)) {
+                item = plugin.getItemManager().createLuckBooster(tier);
+            }
+        } else if (itemName.equalsIgnoreCase("phantom_repeller")) {
+            if (args.length < 3) {
+                sender.sendMessage("Usage: /givetreasureitem phantom_repeller <player> <tier>");
+                return false;
+            }
+            String tier = args[2];
+            if (plugin.getConfig().getConfigurationSection("items.phantom_repellers").getKeys(false).contains(tier)) {
+                item = plugin.getItemManager().createPhantomRepeller(tier);
+            }
         } else if (itemName.equalsIgnoreCase("golden_pickaxe")) {
             item = plugin.getItemManager().createGoldenPickaxe();
         } else if (itemName.equalsIgnoreCase("infinity_water_bucket")) {
