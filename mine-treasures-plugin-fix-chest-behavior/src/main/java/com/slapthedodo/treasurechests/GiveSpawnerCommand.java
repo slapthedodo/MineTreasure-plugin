@@ -65,7 +65,6 @@ public class GiveSpawnerCommand implements CommandExecutor {
         }
 
         target.getInventory().addItem(spawner);
-        target.sendMessage(plugin.getMessageManager().getMessage("spawner-received"));
         sender.sendMessage(plugin.getMessageManager().getMessage("spawner-given", "%player%", target.getName()));
 
         return true;
