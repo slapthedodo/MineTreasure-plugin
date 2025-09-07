@@ -20,6 +20,7 @@ com/slapthedodo/treasurechests/Animation$SoundEffect.class
 com/slapthedodo/treasurechests/InventoryCloseListener.class
 com/slapthedodo/treasurechests/BlockBreakListener.class
 com/slapthedodo/treasurechests/Animation.class
+com/slapthedodo/treasurechests/GiveSpawnerCommand.class
 com/slapthedodo/treasurechests/DisplayManager$3.class
 com/slapthedodo/treasurechests/BlockPlaceListener.class
 com/slapthedodo/treasurechests/LootTier.class

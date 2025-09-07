@@ -9,3 +9,7 @@ commands:
     description: Gibt einem Spieler ein Schatz-Item.
     usage: /givetreasureitem <item> <spieler>
     permission: treasurechests.give
+  cybergiverandomspawner:
+    description: Gibt einem Spieler einen zufälligen Spawner.
+    usage: /cybergiverandomspawner <spieler>
+    permission: treasurechests.givespawner
