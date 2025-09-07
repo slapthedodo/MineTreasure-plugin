@@ -26,29 +26,28 @@ public class BlockPlaceListener implements Listener {
         Block block = event.getBlockPlaced();
         ItemStack itemInHand = event.getItemInHand();
 
-        if (block.getType() == Material.SPAWNER) {
-            plugin.getLogger().info("[DEBUG] Spawner placed.");
-            if (itemInHand.hasItemMeta()) {
-                plugin.getLogger().info("[DEBUG] Item has meta.");
-                ItemMeta itemMeta = itemInHand.getItemMeta();
-                if (itemMeta != null && itemMeta.getPersistentDataContainer().has(plugin.getNamespacedKey("spawner_type"), PersistentDataType.STRING)) {
-                    plugin.getLogger().info("[DEBUG] Item has spawner_type persistent data.");
-                    String entityTypeName = itemMeta.getPersistentDataContainer().get(plugin.getNamespacedKey("spawner_type"), PersistentDataType.STRING);
-                    plugin.getLogger().info("[DEBUG] Entity type from persistent data: " + entityTypeName);
-                    try {
-                        EntityType entityType = EntityType.valueOf(entityTypeName);
-                        CreatureSpawner placedSpawnerState = (CreatureSpawner) block.getState();
-                        placedSpawnerState.setSpawnedType(entityType);
-                        placedSpawnerState.update();
-                        plugin.getLogger().info("[DEBUG] Spawner type set to: " + entityType.name());
-                    } catch (IllegalArgumentException e) {
-                        plugin.getLogger().warning("Invalid entity type for spawner: " + entityTypeName);
-                    }
-                } else {
-                    plugin.getLogger().info("[DEBUG] Item does not have spawner_type persistent data.");
+        if (itemInHand.getType() == Material.SPAWNER && itemInHand.hasItemMeta()) {
+            ItemMeta itemMeta = itemInHand.getItemMeta();
+            if (itemMeta != null && itemMeta.getPersistentDataContainer().has(plugin.getNamespacedKey("spawner_type"), PersistentDataType.STRING)) {
+                event.setCancelled(true);
+
+                // Manually place the spawner and set its type
+                block.setType(Material.SPAWNER);
+                CreatureSpawner spawnerState = (CreatureSpawner) block.getState();
+                String entityTypeName = itemMeta.getPersistentDataContainer().get(plugin.getNamespacedKey("spawner_type"), PersistentDataType.STRING);
+                try {
+                    EntityType entityType = EntityType.valueOf(entityTypeName);
+                    spawnerState.setSpawnedType(entityType);
+                    spawnerState.update(true);
+                    plugin.getLogger().info("[DEBUG] Forcefully set spawner type to: " + entityType.name());
+
+                    // Consume the item in hand
+                    itemInHand.setAmount(itemInHand.getAmount() - 1);
+                } catch (IllegalArgumentException e) {
+                    plugin.getLogger().warning("Invalid entity type for spawner: " + entityTypeName);
+                    // Un-cancel the event to let the default spawner place
+                    event.setCancelled(false);
                 }
-            } else {
-                plugin.getLogger().info("[DEBUG] Item does not have meta.");
             }
         }
 
