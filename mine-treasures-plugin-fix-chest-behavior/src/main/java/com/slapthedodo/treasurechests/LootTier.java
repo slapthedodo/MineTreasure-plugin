@@ -1,0 +1,84 @@
+package com.slapthedodo.treasurechests;
+
+import com.slapthedodo.treasurechests.Animation.AnimationInfo;
+
+import java.util.List;
+
+public class LootTier {
+
+    private final String name;
+    private final String displayName;
+    private final String headTexture;
+    private final double chance;
+    private final int despawnTimer;
+    private final SoundInfo soundInfo;
+    private final boolean broadcastEnabled;
+    private final String broadcastMessage;
+    private final List<LootItem> items;
+    private final AnimationInfo spawnAnimation;
+    private final AnimationInfo despawnAnimation;
+    private final XpBoostInfo xpBoostInfo;
+
+    public LootTier(String name, String displayName, String headTexture, double chance, int despawnTimer, SoundInfo soundInfo, List<LootItem> items, AnimationInfo spawnAnimation, AnimationInfo despawnAnimation, boolean broadcastEnabled, String broadcastMessage, XpBoostInfo xpBoostInfo) {
+        this.name = name;
+        this.displayName = displayName;
+        this.headTexture = headTexture;
+        this.chance = chance;
+        this.despawnTimer = despawnTimer;
+        this.soundInfo = soundInfo;
+        this.items = items;
+        this.spawnAnimation = spawnAnimation;
+        this.despawnAnimation = despawnAnimation;
+        this.broadcastEnabled = broadcastEnabled;
+        this.broadcastMessage = broadcastMessage;
+        this.xpBoostInfo = xpBoostInfo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public String getHeadTexture() {
+        return headTexture;
+    }
+
+    public double getChance() {
+        return chance;
+    }
+
+    public int getDespawnTimer() {
+        return despawnTimer;
+    }
+
+    public SoundInfo getSoundInfo() {
+        return soundInfo;
+    }
+
+    public List<LootItem> getItems() {
+        return items;
+    }
+
+    public AnimationInfo getSpawnAnimation() {
+        return spawnAnimation;
+    }
+
+    public AnimationInfo getDespawnAnimation() {
+        return despawnAnimation;
+    }
+
+    public boolean isBroadcastEnabled() {
+        return broadcastEnabled;
+    }
+
+    public String getBroadcastMessage() {
+        return broadcastMessage;
+    }
+
+    public XpBoostInfo getXpBoostInfo() {
+        return xpBoostInfo;
+    }
+}
