@@ -30,13 +30,6 @@ public class InfinityWaterBucketListener implements Listener {
                 Block clickedBlock = event.getClickedBlock();
                 if (clickedBlock != null) {
                     Block targetBlock = clickedBlock.getRelative(event.getBlockFace());
-
-                    WorldGuardManager worldGuardManager = plugin.getWorldGuardManager();
-                    if (worldGuardManager != null && !worldGuardManager.canBuild(event.getPlayer(), targetBlock.getLocation())) {
-                        event.getPlayer().sendMessage(plugin.getMessageManager().getMessage("cannot-use-in-protected-area"));
-                        return;
-                    }
-
                     targetBlock.setType(Material.WATER);
                 }
             }

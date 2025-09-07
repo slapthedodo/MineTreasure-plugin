@@ -1,4 +1,3 @@
-com/danny/treasurechests/GiveSpawnerCommand.class
 com/danny/treasurechests/DisplayManager.class
 com/danny/treasurechests/LootTier.class
 com/danny/treasurechests/BarrierInteractListener.class
@@ -10,7 +9,6 @@ com/danny/treasurechests/XpBoostInfo.class
 com/danny/treasurechests/BlockPlaceListener.class
 com/danny/treasurechests/TreasureChestManager$TreasureChestData.class
 com/danny/treasurechests/ItemManager.class
-com/danny/treasurechests/WorldGuardManager.class
 com/danny/treasurechests/DisplayManager$1.class
 com/danny/treasurechests/TreasureChests.class
 com/danny/treasurechests/RewardManager$1.class

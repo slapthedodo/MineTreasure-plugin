@@ -38,13 +38,6 @@ public class BlockBreakListener implements Listener {
 
         ItemStack itemInHand = player.getInventory().getItemInMainHand();
         if (itemInHand.hasItemMeta() && itemInHand.getItemMeta().getPersistentDataContainer().has(plugin.getNamespacedKey("golden_pickaxe"), PersistentDataType.BOOLEAN)) {
-            WorldGuardManager worldGuardManager = plugin.getWorldGuardManager();
-            if (worldGuardManager != null && !worldGuardManager.canBuild(player, location)) {
-                player.sendMessage(plugin.getMessageManager().getMessage("cannot-use-in-protected-area"));
-                event.setCancelled(true);
-                return;
-            }
-
             event.setDropItems(false);
             itemInHand.setAmount(0);
 

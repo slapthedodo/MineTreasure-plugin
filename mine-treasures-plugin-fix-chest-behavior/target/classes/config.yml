@@ -61,7 +61,7 @@ loot-tables:
           custom-item: "infinity_water_bucket"
           amount: 1
           chance: 0.05
-        - material: "SPLASH_POTION"
+        - material: "POTION"
           potion-effects:
             - "STRENGTH:2:60"
           amount: 1

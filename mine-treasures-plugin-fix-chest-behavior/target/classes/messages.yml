@@ -15,17 +15,12 @@ config-error: "&cFehler beim Verarbeiten von '%path%' in der Konfiguration: %err
 invalid-material: "&cUngültiges Material '%material%' in Stufe '%tier%'. Gegenstand wird übersprungen."
 no-valid-items: "&cKeine gültigen Gegenstände für Stufe '%tier%'. Diese Stufe wird übersprungen."
 no-loot-tiers: "&cKeine gültigen Beutestufen geladen! Das Plugin wird nicht korrekt funktionieren."
-cannot-use-in-protected-area: "&cDu kannst diesen Gegenstand in einem geschützten Bereich nicht verwenden."
 
 # Command messages
 unknown-command: "&cUnbekannter Befehl. Benutze /givetreasureitem <item> <spieler>."
 player-not-found: "&cSpieler nicht gefunden."
 item-not-found: "&cGegenstand nicht gefunden."
 item-given: "&aGegenstand an %player% gegeben."
-no-permission: "&cDu hast keine Berechtigung, diesen Befehl auszuführen."
-givespawner-usage: "&cBenutzung: /cybergiverandomspawner <spieler>"
-spawner-received: "&aDu hast einen zufälligen Spawner erhalten!"
-spawner-given: "&aDu hast %player% einen zufälligen Spawner gegeben."
 
 # Luck booster messages
 luck-booster-activated: "&aGlücks-Booster aktiviert! Du hast eine erhöhte Chance, Schätze für %time% Minuten zu finden."

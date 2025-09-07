@@ -1,6 +1,5 @@
 /app/mine-treasures-plugin-fix-chest-behavior/src/main/java/com/danny/treasurechests/InventoryCloseListener.java
 /app/mine-treasures-plugin-fix-chest-behavior/src/main/java/com/danny/treasurechests/LuckBoosterManager.java
-/app/mine-treasures-plugin-fix-chest-behavior/src/main/java/com/danny/treasurechests/GiveSpawnerCommand.java
 /app/mine-treasures-plugin-fix-chest-behavior/src/main/java/com/danny/treasurechests/ItemManager.java
 /app/mine-treasures-plugin-fix-chest-behavior/src/main/java/com/danny/treasurechests/XpBoostInfo.java
 /app/mine-treasures-plugin-fix-chest-behavior/src/main/java/com/danny/treasurechests/InfinityWaterBucketListener.java
@@ -19,4 +18,3 @@
 /app/mine-treasures-plugin-fix-chest-behavior/src/main/java/com/danny/treasurechests/BlockPlaceListener.java
 /app/mine-treasures-plugin-fix-chest-behavior/src/main/java/com/danny/treasurechests/DisplayManager.java
 /app/mine-treasures-plugin-fix-chest-behavior/src/main/java/com/danny/treasurechests/MessageManager.java
-/app/mine-treasures-plugin-fix-chest-behavior/src/main/java/com/danny/treasurechests/WorldGuardManager.java
