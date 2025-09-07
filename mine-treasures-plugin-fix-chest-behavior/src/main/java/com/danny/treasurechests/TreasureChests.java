@@ -44,6 +44,7 @@ public class TreasureChests extends JavaPlugin {
 
         // Register commands
         getCommand("givetreasureitem").setExecutor(new GiveTreasureItemCommand(this));
+        getCommand("givespawner").setExecutor(new GiveSpawnerCommand(this));
 
         getLogger().info(messageManager.getPlainMessage("plugin-enabled"));
     }

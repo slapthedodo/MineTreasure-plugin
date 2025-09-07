@@ -22,6 +22,10 @@ unknown-command: "&cUnbekannter Befehl. Benutze /givetreasureitem <item> <spiele
 player-not-found: "&cSpieler nicht gefunden."
 item-not-found: "&cGegenstand nicht gefunden."
 item-given: "&aGegenstand an %player% gegeben."
+no-permission: "&cDu hast keine Berechtigung, diesen Befehl auszuführen."
+givespawner-usage: "&cBenutzung: /givespawner <spieler>"
+spawner-received: "&aDu hast einen zufälligen Spawner erhalten!"
+spawner-given: "&aDu hast %player% einen zufälligen Spawner gegeben."
 
 # Luck booster messages
 luck-booster-activated: "&aGlücks-Booster aktiviert! Du hast eine erhöhte Chance, Schätze für %time% Minuten zu finden."
