@@ -56,10 +56,12 @@ public class GiveSpawnerCommand implements CommandExecutor {
         ItemMeta meta = spawner.getItemMeta();
         if (meta != null) {
             try {
+                plugin.getLogger().info("[DEBUG] Creating spawner with type: " + randomType);
                 EntityType entityType = EntityType.valueOf(randomType.toUpperCase());
                 meta.setDisplayName(randomType.substring(0, 1).toUpperCase() + randomType.substring(1).toLowerCase() + " Spawner");
                 meta.getPersistentDataContainer().set(plugin.getNamespacedKey("spawner_type"), PersistentDataType.STRING, entityType.name());
                 spawner.setItemMeta(meta);
+                plugin.getLogger().info("[DEBUG] Spawner item created with persistent data: " + spawner.getItemMeta().getPersistentDataContainer().get(plugin.getNamespacedKey("spawner_type"), PersistentDataType.STRING));
             } catch (IllegalArgumentException e) {
                 plugin.getLogger().warning("Invalid entity type for spawner: " + randomType);
                 sender.sendMessage("Error: Invalid entity type '" + randomType + "'.");

@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -22,9 +23,15 @@ public class InfinityGoldenCarrotListener implements Listener {
         if (item != null && item.getType() == Material.GOLDEN_CARROT && item.hasItemMeta()) {
             if (item.getItemMeta().getPersistentDataContainer().has(plugin.getNamespacedKey("infinity_golden_carrot"), PersistentDataType.BOOLEAN)) {
                 Player player = event.getPlayer();
-                // We need to give the item back to the player a tick later
+                final EquipmentSlot hand = event.getHand();
+                final int slot = player.getInventory().getHeldItemSlot();
+
                 plugin.getServer().getScheduler().runTask(plugin, () -> {
-                    player.getInventory().setItem(event.getHand(), item);
+                    if (hand == EquipmentSlot.OFF_HAND) {
+                        player.getInventory().setItemInOffHand(item);
+                    } else {
+                        player.getInventory().setItem(slot, item);
+                    }
                     player.setFoodLevel(20);
                     player.setSaturation(20);
                 });

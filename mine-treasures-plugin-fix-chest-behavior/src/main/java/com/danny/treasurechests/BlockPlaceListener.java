@@ -26,18 +26,29 @@ public class BlockPlaceListener implements Listener {
         Block block = event.getBlockPlaced();
         ItemStack itemInHand = event.getItemInHand();
 
-        if (block.getType() == Material.SPAWNER && itemInHand.hasItemMeta()) {
-            ItemMeta itemMeta = itemInHand.getItemMeta();
-            if (itemMeta != null && itemMeta.getPersistentDataContainer().has(plugin.getNamespacedKey("spawner_type"), PersistentDataType.STRING)) {
-                String entityTypeName = itemMeta.getPersistentDataContainer().get(plugin.getNamespacedKey("spawner_type"), PersistentDataType.STRING);
-                try {
-                    EntityType entityType = EntityType.valueOf(entityTypeName);
-                    CreatureSpawner placedSpawnerState = (CreatureSpawner) block.getState();
-                    placedSpawnerState.setSpawnedType(entityType);
-                    placedSpawnerState.update();
-                } catch (IllegalArgumentException e) {
-                    plugin.getLogger().warning("Invalid entity type for spawner: " + entityTypeName);
+        if (block.getType() == Material.SPAWNER) {
+            plugin.getLogger().info("[DEBUG] Spawner placed.");
+            if (itemInHand.hasItemMeta()) {
+                plugin.getLogger().info("[DEBUG] Item has meta.");
+                ItemMeta itemMeta = itemInHand.getItemMeta();
+                if (itemMeta != null && itemMeta.getPersistentDataContainer().has(plugin.getNamespacedKey("spawner_type"), PersistentDataType.STRING)) {
+                    plugin.getLogger().info("[DEBUG] Item has spawner_type persistent data.");
+                    String entityTypeName = itemMeta.getPersistentDataContainer().get(plugin.getNamespacedKey("spawner_type"), PersistentDataType.STRING);
+                    plugin.getLogger().info("[DEBUG] Entity type from persistent data: " + entityTypeName);
+                    try {
+                        EntityType entityType = EntityType.valueOf(entityTypeName);
+                        CreatureSpawner placedSpawnerState = (CreatureSpawner) block.getState();
+                        placedSpawnerState.setSpawnedType(entityType);
+                        placedSpawnerState.update();
+                        plugin.getLogger().info("[DEBUG] Spawner type set to: " + entityType.name());
+                    } catch (IllegalArgumentException e) {
+                        plugin.getLogger().warning("Invalid entity type for spawner: " + entityTypeName);
+                    }
+                } else {
+                    plugin.getLogger().info("[DEBUG] Item does not have spawner_type persistent data.");
                 }
+            } else {
+                plugin.getLogger().info("[DEBUG] Item does not have meta.");
             }
         }
 
