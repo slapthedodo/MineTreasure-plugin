@@ -33,4 +33,5 @@ com/slapthedodo/treasurechests/TreasureChestManager$TreasureChestData.class
 com/slapthedodo/treasurechests/SoundInfo.class
 com/slapthedodo/treasurechests/GiveTreasureItemCommand.class
 com/slapthedodo/treasurechests/MessageManager.class
+com/slapthedodo/treasurechests/PhantomSoundListener.class
 com/slapthedodo/treasurechests/DisplayManager$1.class

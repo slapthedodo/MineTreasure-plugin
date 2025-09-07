@@ -1,10 +1,13 @@
 package com.slapthedodo.treasurechests;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class TreasureChests extends JavaPlugin {
 
+    private ProtocolManager protocolManager;
     private LootManager lootManager;
     private TreasureChestManager treasureChestManager;
     private DisplayManager displayManager;
@@ -18,6 +21,14 @@ public class TreasureChests extends JavaPlugin {
     public void onEnable() {
         // Save a copy of the default config.yml if one is not present
         saveDefaultConfig();
+
+        // Initialize protocol manager
+        if (getServer().getPluginManager().getPlugin("ProtocolLib") != null) {
+            protocolManager = ProtocolLibrary.getProtocolManager();
+        } else {
+            getLogger().warning("ProtocolLib not found, phantom silencing will not work.");
+            protocolManager = null;
+        }
 
         // Initialize managers and handlers
         this.messageManager = new MessageManager(this);
@@ -43,6 +54,9 @@ public class TreasureChests extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new InfinityWaterBucketListener(this), this);
         getServer().getPluginManager().registerEvents(new InfinityGoldenCarrotListener(this), this);
         getServer().getPluginManager().registerEvents(new PhantomRepellerListener(this), this);
+        if (protocolManager != null) {
+            protocolManager.addPacketListener(new PhantomSoundListener(this));
+        }
 
         // Register commands
         getCommand("givetreasureitem").setExecutor(new GiveTreasureItemCommand(this));
@@ -86,6 +100,10 @@ public class TreasureChests extends JavaPlugin {
 
     public WorldGuardManager getWorldGuardManager() {
         return worldGuardManager;
+    }
+
+    public ProtocolManager getProtocolManager() {
+        return protocolManager;
     }
 
     public NamespacedKey getNamespacedKey(String key) {

@@ -2,7 +2,6 @@ package com.slapthedodo.treasurechests;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.Particle;
-import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -64,13 +63,6 @@ public class PhantomRepellerListener implements Listener {
                 } catch (IllegalArgumentException e) {
                     // Particle effect not found, do nothing or log a warning
                 }
-
-                // Silence phantom sounds
-                player.stopSound(Sound.ENTITY_PHANTOM_AMBIENT);
-                player.stopSound(Sound.ENTITY_PHANTOM_SWOOP);
-                player.stopSound(Sound.ENTITY_PHANTOM_FLAP);
-                player.stopSound(Sound.ENTITY_PHANTOM_BITE);
-                player.stopSound(Sound.ENTITY_PHANTOM_HURT);
             }
         }
     }
