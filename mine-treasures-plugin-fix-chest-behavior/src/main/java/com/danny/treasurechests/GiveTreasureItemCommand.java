@@ -37,6 +37,8 @@ public class GiveTreasureItemCommand implements CommandExecutor {
             item = plugin.getItemManager().createGoldenPickaxe();
         } else if (itemName.equalsIgnoreCase("infinity_water_bucket")) {
             item = plugin.getItemManager().createInfinityWaterBucket();
+        } else if (itemName.equalsIgnoreCase("infinity_golden_carrot")) {
+            item = plugin.getItemManager().createInfinityGoldenCarrot();
         }
 
         if (item == null) {

@@ -2,6 +2,7 @@ package com.danny.treasurechests;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,6 +11,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -50,12 +53,12 @@ public class GiveSpawnerCommand implements CommandExecutor {
 
         String randomType = spawnerTypes.get(random.nextInt(spawnerTypes.size()));
         ItemStack spawner = new ItemStack(Material.SPAWNER, 1);
-        BlockStateMeta meta = (BlockStateMeta) spawner.getItemMeta();
+        ItemMeta meta = spawner.getItemMeta();
         if (meta != null) {
-            CreatureSpawner spawnerState = (CreatureSpawner) meta.getBlockState();
             try {
-                spawnerState.setSpawnedType(EntityType.valueOf(randomType.toUpperCase()));
-                meta.setBlockState(spawnerState);
+                EntityType entityType = EntityType.valueOf(randomType.toUpperCase());
+                meta.setDisplayName(randomType.substring(0, 1).toUpperCase() + randomType.substring(1).toLowerCase() + " Spawner");
+                meta.getPersistentDataContainer().set(plugin.getNamespacedKey("spawner_type"), PersistentDataType.STRING, entityType.name());
                 spawner.setItemMeta(meta);
             } catch (IllegalArgumentException e) {
                 plugin.getLogger().warning("Invalid entity type for spawner: " + randomType);

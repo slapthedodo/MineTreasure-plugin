@@ -267,6 +267,10 @@ items:
     display-name: "&bUnendlicher Wassereimer"
     lore:
       - "&7Dieser Eimer geht niemals leer."
+  infinity_golden_carrot:
+    display-name: "&6Unendliche Goldene Karotte"
+    lore:
+      - "&7Diese Karotte wird niemals aufgebraucht."
 
 # Potions can be added to loot tables like this:
 # - material: "POTION"

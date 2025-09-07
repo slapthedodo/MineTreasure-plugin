@@ -37,6 +37,12 @@ public class InfinityWaterBucketListener implements Listener {
                         return;
                     }
 
+                    UltimateClaimsManager ultimateClaimsManager = plugin.getUltimateClaimsManager();
+                    if (ultimateClaimsManager != null && !ultimateClaimsManager.canBuild(event.getPlayer(), targetBlock.getLocation())) {
+                        event.getPlayer().sendMessage(plugin.getMessageManager().getMessage("cannot-use-in-protected-area"));
+                        return;
+                    }
+
                     targetBlock.setType(Material.WATER);
                 }
             }

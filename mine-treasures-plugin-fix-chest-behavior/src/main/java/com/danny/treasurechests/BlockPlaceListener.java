@@ -8,7 +8,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.BlockStateMeta;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 public class BlockPlaceListener implements Listener {
 
@@ -26,15 +27,16 @@ public class BlockPlaceListener implements Listener {
         ItemStack itemInHand = event.getItemInHand();
 
         if (block.getType() == Material.SPAWNER && itemInHand.hasItemMeta()) {
-            if (itemInHand.getItemMeta() instanceof BlockStateMeta) {
-                BlockStateMeta itemMeta = (BlockStateMeta) itemInHand.getItemMeta();
-                if (itemMeta.getBlockState() instanceof CreatureSpawner) {
-                    CreatureSpawner itemSpawnerState = (CreatureSpawner) itemMeta.getBlockState();
-                    EntityType entityType = itemSpawnerState.getSpawnedType();
-
+            ItemMeta itemMeta = itemInHand.getItemMeta();
+            if (itemMeta != null && itemMeta.getPersistentDataContainer().has(plugin.getNamespacedKey("spawner_type"), PersistentDataType.STRING)) {
+                String entityTypeName = itemMeta.getPersistentDataContainer().get(plugin.getNamespacedKey("spawner_type"), PersistentDataType.STRING);
+                try {
+                    EntityType entityType = EntityType.valueOf(entityTypeName);
                     CreatureSpawner placedSpawnerState = (CreatureSpawner) block.getState();
                     placedSpawnerState.setSpawnedType(entityType);
                     placedSpawnerState.update();
+                } catch (IllegalArgumentException e) {
+                    plugin.getLogger().warning("Invalid entity type for spawner: " + entityTypeName);
                 }
             }
         }

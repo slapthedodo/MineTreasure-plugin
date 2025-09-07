@@ -13,6 +13,7 @@ public class TreasureChests extends JavaPlugin {
     private ItemManager itemManager;
     private RewardManager rewardManager;
     private WorldGuardManager worldGuardManager;
+    private UltimateClaimsManager ultimateClaimsManager;
 
     @Override
     public void onEnable() {
@@ -30,6 +31,9 @@ public class TreasureChests extends JavaPlugin {
         if (getServer().getPluginManager().getPlugin("WorldGuard") != null) {
             this.worldGuardManager = new WorldGuardManager();
         }
+        if (getServer().getPluginManager().getPlugin("UltimateClaims") != null) {
+            this.ultimateClaimsManager = new UltimateClaimsManager();
+        }
 
         // Load loot tables from config
         this.lootManager.loadLootTablesAsync();
@@ -41,10 +45,12 @@ public class TreasureChests extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new InventoryCloseListener(treasureChestManager, this, displayManager), this);
         getServer().getPluginManager().registerEvents(new LuckBoosterListener(this), this);
         getServer().getPluginManager().registerEvents(new InfinityWaterBucketListener(this), this);
+        getServer().getPluginManager().registerEvents(new InfinityGoldenCarrotListener(this), this);
 
         // Register commands
         getCommand("givetreasureitem").setExecutor(new GiveTreasureItemCommand(this));
         getCommand("cybergiverandomspawner").setExecutor(new GiveSpawnerCommand(this));
+        getCommand("debugclaims").setExecutor(new DebugClaimsCommand());
 
         getLogger().info(messageManager.getPlainMessage("plugin-enabled"));
     }
@@ -84,6 +90,10 @@ public class TreasureChests extends JavaPlugin {
 
     public WorldGuardManager getWorldGuardManager() {
         return worldGuardManager;
+    }
+
+    public UltimateClaimsManager getUltimateClaimsManager() {
+        return ultimateClaimsManager;
     }
 
     public NamespacedKey getNamespacedKey(String key) {

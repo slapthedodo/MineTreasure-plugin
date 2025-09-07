@@ -14,3 +14,7 @@ commands:
     description: Gibt einem Spieler einen zufälligen Spawner.
     usage: /cybergiverandomspawner <spieler>
     permission: treasurechests.givespawner
+  debugclaims:
+    description: Debug command for claims.
+    usage: /debugclaims
+    permission: treasurechests.debug

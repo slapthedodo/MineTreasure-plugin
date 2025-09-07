@@ -45,6 +45,13 @@ public class BlockBreakListener implements Listener {
                 return;
             }
 
+            UltimateClaimsManager ultimateClaimsManager = plugin.getUltimateClaimsManager();
+            if (ultimateClaimsManager != null && !ultimateClaimsManager.canBuild(player, location)) {
+                player.sendMessage(plugin.getMessageManager().getMessage("cannot-use-in-protected-area"));
+                event.setCancelled(true);
+                return;
+            }
+
             event.setDropItems(false);
             itemInHand.setAmount(0);
 
