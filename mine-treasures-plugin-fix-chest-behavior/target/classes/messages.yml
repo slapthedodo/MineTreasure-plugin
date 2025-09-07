@@ -15,6 +15,7 @@ config-error: "&cFehler beim Verarbeiten von '%path%' in der Konfiguration: %err
 invalid-material: "&cUngültiges Material '%material%' in Stufe '%tier%'. Gegenstand wird übersprungen."
 no-valid-items: "&cKeine gültigen Gegenstände für Stufe '%tier%'. Diese Stufe wird übersprungen."
 no-loot-tiers: "&cKeine gültigen Beutestufen geladen! Das Plugin wird nicht korrekt funktionieren."
+cannot-use-in-protected-area: "&cDu kannst diesen Gegenstand in einem geschützten Bereich nicht verwenden."
 
 # Command messages
 unknown-command: "&cUnbekannter Befehl. Benutze /givetreasureitem <item> <spieler>."
