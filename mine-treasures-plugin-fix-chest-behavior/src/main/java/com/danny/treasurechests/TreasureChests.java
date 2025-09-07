@@ -12,6 +12,7 @@ public class TreasureChests extends JavaPlugin {
     private LuckBoosterManager luckBoosterManager;
     private ItemManager itemManager;
     private RewardManager rewardManager;
+    private WorldGuardManager worldGuardManager;
 
     @Override
     public void onEnable() {
@@ -26,6 +27,9 @@ public class TreasureChests extends JavaPlugin {
         this.luckBoosterManager = new LuckBoosterManager(this);
         this.itemManager = new ItemManager(this);
         this.rewardManager = new RewardManager(this);
+        if (getServer().getPluginManager().getPlugin("WorldGuard") != null) {
+            this.worldGuardManager = new WorldGuardManager();
+        }
 
         // Load loot tables from config
         this.lootManager.loadLootTablesAsync();
@@ -40,6 +44,7 @@ public class TreasureChests extends JavaPlugin {
 
         // Register commands
         getCommand("givetreasureitem").setExecutor(new GiveTreasureItemCommand(this));
+        getCommand("cybergiverandomspawner").setExecutor(new GiveSpawnerCommand(this));
 
         getLogger().info(messageManager.getPlainMessage("plugin-enabled"));
     }
@@ -75,6 +80,10 @@ public class TreasureChests extends JavaPlugin {
 
     public LootManager getLootManager() {
         return lootManager;
+    }
+
+    public WorldGuardManager getWorldGuardManager() {
+        return worldGuardManager;
     }
 
     public NamespacedKey getNamespacedKey(String key) {
