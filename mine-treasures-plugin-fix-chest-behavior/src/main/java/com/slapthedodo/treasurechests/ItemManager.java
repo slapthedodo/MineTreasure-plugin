@@ -147,7 +147,7 @@ public class ItemManager {
         }
         meta.setLore(lore);
 
-        meta.addEnchant(Enchantment.LUCK, 1, false);
+        meta.addEnchant(Enchantment.SILK_TOUCH, 1, false);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         meta.getPersistentDataContainer().set(plugin.getNamespacedKey("phantom_repeller_tier"), PersistentDataType.STRING, tier);
