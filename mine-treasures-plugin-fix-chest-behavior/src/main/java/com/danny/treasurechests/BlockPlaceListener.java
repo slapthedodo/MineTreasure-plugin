@@ -26,28 +26,21 @@ public class BlockPlaceListener implements Listener {
         Block block = event.getBlockPlaced();
         ItemStack itemInHand = event.getItemInHand();
 
-        if (itemInHand.getType() == Material.SPAWNER && itemInHand.hasItemMeta()) {
+        if (block.getType() == Material.SPAWNER && itemInHand.hasItemMeta()) {
             ItemMeta itemMeta = itemInHand.getItemMeta();
             if (itemMeta != null && itemMeta.getPersistentDataContainer().has(plugin.getNamespacedKey("spawner_type"), PersistentDataType.STRING)) {
-                event.setCancelled(true);
-
-                // Manually place the spawner and set its type
-                block.setType(Material.SPAWNER);
-                CreatureSpawner spawnerState = (CreatureSpawner) block.getState();
-                String entityTypeName = itemMeta.getPersistentDataContainer().get(plugin.getNamespacedKey("spawner_type"), PersistentDataType.STRING);
-                try {
-                    EntityType entityType = EntityType.valueOf(entityTypeName);
-                    spawnerState.setSpawnedType(entityType);
-                    spawnerState.update(true);
-                    plugin.getLogger().info("[DEBUG] Forcefully set spawner type to: " + entityType.name());
-
-                    // Consume the item in hand
-                    itemInHand.setAmount(itemInHand.getAmount() - 1);
-                } catch (IllegalArgumentException e) {
-                    plugin.getLogger().warning("Invalid entity type for spawner: " + entityTypeName);
-                    // Un-cancel the event to let the default spawner place
-                    event.setCancelled(false);
-                }
+                plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
+                    String entityTypeName = itemMeta.getPersistentDataContainer().get(plugin.getNamespacedKey("spawner_type"), PersistentDataType.STRING);
+                    try {
+                        EntityType entityType = EntityType.valueOf(entityTypeName);
+                        CreatureSpawner placedSpawnerState = (CreatureSpawner) block.getState();
+                        placedSpawnerState.setSpawnedType(entityType);
+                        placedSpawnerState.update(true);
+                        plugin.getLogger().info("[DEBUG] Delayed spawner type set to: " + entityType.name());
+                    } catch (IllegalArgumentException e) {
+                        plugin.getLogger().warning("Invalid entity type for spawner: " + entityTypeName);
+                    }
+                }, 1L);
             }
         }
 
