@@ -27,7 +27,14 @@ public class ItemManager {
             return null;
         }
 
-        ItemStack item = new ItemStack(Material.YELLOW_DYE);
+        String materialName = section.getString("material", "YELLOW_DYE");
+        Material material = Material.getMaterial(materialName.toUpperCase());
+        if (material == null) {
+            plugin.getLogger().warning("Invalid material '" + materialName + "' for luck booster tier '" + tier + "'. Defaulting to YELLOW_DYE.");
+            material = Material.YELLOW_DYE;
+        }
+
+        ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
 
         meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', section.getString("display-name")));
