@@ -148,6 +148,7 @@ public class LootManager {
                     String itemDisplayName = (String) itemMap.get("display-name");
                     java.util.List<String> potionEffects = (java.util.List<String>) itemMap.get("potion-effects");
                     List<String> spawnerTypes = (List<String>) itemMap.get("spawner-types");
+                    String tier = (String) itemMap.get("tier");
                     String amount = "1";
                     Object amountObj = itemMap.get("amount");
                     if (amountObj != null) {
@@ -160,7 +161,7 @@ public class LootManager {
                         chance = ((Number) chanceObj).doubleValue();
                     }
 
-                    items.add(new LootItem(material, customItem, itemDisplayName, amount, chance, potionEffects, spawnerTypes));
+                    items.add(new LootItem(material, customItem, itemDisplayName, amount, chance, potionEffects, spawnerTypes, tier));
                 } catch (Exception e) {
                     plugin.getLogger().severe(plugin.getMessageManager().getMessage("config-error", "%path%", "items", "%error%", e.getMessage()));
                 }
@@ -292,6 +293,12 @@ public class LootManager {
                 return plugin.getItemManager().createGoldenPickaxe();
             } else if (customItem.equalsIgnoreCase("infinity_water_bucket")) {
                 return plugin.getItemManager().createInfinityWaterBucket();
+            } else if (customItem.equalsIgnoreCase("infinity_golden_carrot")) {
+                return plugin.getItemManager().createInfinityGoldenCarrot();
+            } else if (customItem.equalsIgnoreCase("phantom_repeller")) {
+                if (item.getTier() != null) {
+                    return plugin.getItemManager().createPhantomRepeller(item.getTier());
+                }
             }
         }
 

@@ -13,8 +13,9 @@ public class LootItem {
     private final double chance;
     private final List<String> potionEffects;
     private final List<String> spawnerTypes;
+    private final String tier;
 
-    public LootItem(Material material, String customItem, String displayName, String amount, double chance, List<String> potionEffects, List<String> spawnerTypes) {
+    public LootItem(Material material, String customItem, String displayName, String amount, double chance, List<String> potionEffects, List<String> spawnerTypes, String tier) {
         this.material = material;
         this.customItem = customItem;
         this.displayName = displayName;
@@ -22,6 +23,7 @@ public class LootItem {
         this.chance = chance;
         this.potionEffects = potionEffects;
         this.spawnerTypes = spawnerTypes;
+        this.tier = tier;
     }
 
     public Material getMaterial() {
@@ -50,5 +52,9 @@ public class LootItem {
 
     public List<String> getSpawnerTypes() {
         return spawnerTypes;
+    }
+
+    public String getTier() {
+        return tier;
     }
 }
