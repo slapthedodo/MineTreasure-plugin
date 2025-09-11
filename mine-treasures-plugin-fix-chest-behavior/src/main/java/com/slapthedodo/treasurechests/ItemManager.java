@@ -163,4 +163,31 @@ public class ItemManager {
         item.setItemMeta(meta);
         return item;
     }
+
+    public ItemStack createXpBottle(String tier) {
+        ConfigurationSection section = plugin.getConfig().getConfigurationSection("items.xp_falschen_custom_xp." + tier);
+        if (section == null) {
+            return null;
+        }
+
+        ItemStack item = new ItemStack(Material.EXPERIENCE_BOTTLE);
+        ItemMeta meta = item.getItemMeta();
+
+        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', section.getString("display-name")));
+
+        List<String> lore = new ArrayList<>();
+        for (String line : section.getStringList("lore")) {
+            lore.add(ChatColor.translateAlternateColorCodes('&', line));
+        }
+        meta.setLore(lore);
+
+        meta.addEnchant(Enchantment.LUCK, 1, false);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        meta.getPersistentDataContainer().set(plugin.getNamespacedKey("xp_bottle_tier"), PersistentDataType.STRING, tier);
+        meta.getPersistentDataContainer().set(plugin.getNamespacedKey("xp_bottle_amount"), PersistentDataType.INTEGER, section.getInt("xp"));
+
+        item.setItemMeta(meta);
+        return item;
+    }
 }

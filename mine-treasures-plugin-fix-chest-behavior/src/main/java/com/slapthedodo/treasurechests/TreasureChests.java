@@ -57,6 +57,7 @@ public class TreasureChests extends JavaPlugin {
         if (protocolManager != null) {
             protocolManager.addPacketListener(new PhantomSoundListener(this));
         }
+        getServer().getPluginManager().registerEvents(new XpBottleListener(this), this);
 
         // Register commands
         getCommand("givetreasureitem").setExecutor(new GiveTreasureItemCommand(this));

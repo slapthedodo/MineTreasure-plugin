@@ -289,6 +289,12 @@ public class LootManager {
                 }
             }
 
+            for (String tier : plugin.getConfig().getConfigurationSection("items.xp_falschen_custom_xp").getKeys(false)) {
+                if (customItem.equalsIgnoreCase(tier) || customItem.equalsIgnoreCase(tier + "_xp_bottle")) {
+                    return plugin.getItemManager().createXpBottle(tier);
+                }
+            }
+
             if (customItem.equalsIgnoreCase("golden_pickaxe")) {
                 return plugin.getItemManager().createGoldenPickaxe();
             } else if (customItem.equalsIgnoreCase("infinity_water_bucket")) {
