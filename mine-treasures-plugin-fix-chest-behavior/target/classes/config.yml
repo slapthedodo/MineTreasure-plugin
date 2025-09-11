@@ -271,6 +271,32 @@ items:
     display-name: "&6Unendliche Goldene Karotte"
     lore:
       - "&7Diese Karotte wird niemals aufgebraucht."
+  xp_flaschen_custom_xp:
+    common:
+      display-name: "&fGewöhnliche XP-Flasche"
+      lore:
+        - "&7"
+      xp: 50
+    rare:
+      display-name: "&9Seltene XP-Flasche"
+      lore:
+        - "&7"
+      xp: 100
+    epic:
+      display-name: "&5Epische XP-Flasche"
+      lore:
+        - "&7"
+      xp: 150
+    legendary:
+      display-name: "&6Legendäre XP-Flasche"
+      lore:
+        - "&7"
+      xp: 200
+    mythic:
+      display-name: "&dMythische XP-Flasche"
+      lore:
+        - "&7"
+      xp: 250
 
 # Potions can be added to loot tables like this:
 # - material: "POTION"
