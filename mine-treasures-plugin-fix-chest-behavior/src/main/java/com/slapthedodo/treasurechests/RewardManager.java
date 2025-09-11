@@ -80,7 +80,13 @@ public class RewardManager {
             }
         }.runTaskTimer(plugin, 20, 20);
 
-        player.sendMessage(plugin.getMessageManager().getMessage("xp-boost-activated", "%time%", String.valueOf(duration / 60)));
+        if (duration < 60) {
+            String message = plugin.getMessageManager().getMessage("xp-boost-activated", "%time%", String.valueOf(duration));
+            message = message.replace("Minuten", "Sekunden");
+            player.sendMessage(message);
+        } else {
+            player.sendMessage(plugin.getMessageManager().getMessage("xp-boost-activated", "%time%", String.valueOf(duration / 60)));
+        }
     }
 
     private String formatTime(int seconds) {

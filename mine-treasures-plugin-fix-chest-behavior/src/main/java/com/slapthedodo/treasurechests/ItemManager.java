@@ -181,7 +181,6 @@ public class ItemManager {
         }
         meta.setLore(lore);
 
-        meta.addEnchant(Enchantment.LUCK_OF_THE_SEA, 1, false);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         meta.getPersistentDataContainer().set(plugin.getNamespacedKey("xp_bottle_tier"), PersistentDataType.STRING, tier);
