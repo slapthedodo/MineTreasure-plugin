@@ -82,10 +82,6 @@ public class BlockBreakListener implements Listener {
                 if (lootResult != null && !lootResult.getItems().isEmpty()) {
                     Bukkit.getScheduler().runTask(plugin, () -> {
                         plugin.getDisplayManager().spawnTreasure(location, lootResult, player);
-                        if (lootResult.getTier().isBroadcastEnabled()) {
-                            String message = plugin.getMessageManager().getMessage("treasure-found", "%player%", player.getName(), "%tier%", lootResult.getTier().getDisplayName());
-                            Bukkit.broadcastMessage(message);
-                        }
                         SoundInfo soundInfo = lootResult.getTier().getSoundInfo();
                         String soundName = soundInfo.getName();
                         try {
@@ -131,10 +127,6 @@ public class BlockBreakListener implements Listener {
                     plugin.getDisplayManager().spawnTreasure(location, lootResult, player);
 
                     // Send feedback to the server
-                    if (lootResult.getTier().isBroadcastEnabled()) {
-                        String message = plugin.getMessageManager().getMessage("treasure-found", "%player%", player.getName(), "%tier%", lootResult.getTier().getDisplayName());
-                        Bukkit.broadcastMessage(message);
-                    }
 
                     // Play sound based on tier settings
                     SoundInfo soundInfo = lootResult.getTier().getSoundInfo();
