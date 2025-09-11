@@ -289,7 +289,7 @@ public class LootManager {
                 }
             }
 
-            for (String tier : plugin.getConfig().getConfigurationSection("items.xp_falschen_custom_xp").getKeys(false)) {
+            for (String tier : plugin.getConfig().getConfigurationSection("items.xp_flaschen_custom_xp").getKeys(false)) {
                 if (customItem.equalsIgnoreCase(tier) || customItem.equalsIgnoreCase(tier + "_xp_bottle")) {
                     return plugin.getItemManager().createXpBottle(tier);
                 }

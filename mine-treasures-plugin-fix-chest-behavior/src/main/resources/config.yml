@@ -271,7 +271,7 @@ items:
     display-name: "&6Unendliche Goldene Karotte"
     lore:
       - "&7Diese Karotte wird niemals aufgebraucht."
-  xp_falschen_custom_xp:
+  xp_flaschen_custom_xp:
     common:
       display-name: "&fGewöhnliche XP-Flasche"
       lore:

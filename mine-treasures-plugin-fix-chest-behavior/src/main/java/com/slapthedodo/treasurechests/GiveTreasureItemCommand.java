@@ -61,7 +61,7 @@ public class GiveTreasureItemCommand implements CommandExecutor {
                 return false;
             }
             String tier = args[2];
-            if (plugin.getConfig().getConfigurationSection("items.xp_falschen_custom_xp").getKeys(false).contains(tier)) {
+            if (plugin.getConfig().getConfigurationSection("items.xp_flaschen_custom_xp").getKeys(false).contains(tier)) {
                 item = plugin.getItemManager().createXpBottle(tier);
             }
         }

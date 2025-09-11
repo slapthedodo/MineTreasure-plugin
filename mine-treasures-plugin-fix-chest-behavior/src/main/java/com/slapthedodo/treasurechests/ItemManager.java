@@ -165,7 +165,7 @@ public class ItemManager {
     }
 
     public ItemStack createXpBottle(String tier) {
-        ConfigurationSection section = plugin.getConfig().getConfigurationSection("items.xp_falschen_custom_xp." + tier);
+        ConfigurationSection section = plugin.getConfig().getConfigurationSection("items.xp_flaschen_custom_xp." + tier);
         if (section == null) {
             return null;
         }
