@@ -55,6 +55,15 @@ public class GiveTreasureItemCommand implements CommandExecutor {
             item = plugin.getItemManager().createInfinityWaterBucket();
         } else if (itemName.equalsIgnoreCase("infinity_golden_carrot")) {
             item = plugin.getItemManager().createInfinityGoldenCarrot();
+        } else if (itemName.equalsIgnoreCase("xp_bottle")) {
+            if (args.length < 3) {
+                sender.sendMessage("Usage: /givetreasureitem xp_bottle <player> <tier>");
+                return false;
+            }
+            String tier = args[2];
+            if (plugin.getConfig().getConfigurationSection("items.xp_falschen_custom_xp").getKeys(false).contains(tier)) {
+                item = plugin.getItemManager().createXpBottle(tier);
+            }
         }
 
         if (item == null) {
